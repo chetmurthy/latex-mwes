@@ -1,44 +1,15 @@
 
-#EPUBCHECK=epubcheck
 EPUBCHECK=java -jar ../../tools/epubcheck/epubcheck-5.2.1.jar
 
-all:: main.FULL
-
-.tex.FULL:
+sample.FULL: sample.tex
 	$(MAKE) clean
-	killall -9 okular ebook-viewer || /bin/true
-	rm -f $*.pdf $*.epub
-	$(MAKE) $*.pdf $*.epub || /bin/true
-	$(MAKE) $*.UNPACKED
-	$(MAKE) $*.CHECK
-
-.epub.CHECK:
-	$(EPUBCHECK) $<
-
-.tex.EPUB+CHECK:
-	$(MAKE) $*.epub || /bin/true
-	$(MAKE) $*.UNPACKED
-	$(MAKE) $*.CHECK
- 
-.tex.VIEW:
-	okular $*.pdf &
-	ebook-viewer $*.epub&
-
-view::
-	okular foo.pdf &
-	ebook-viewer foo.epub&
-
-%.pdf: %.tex *.tex
 	lualatex $*
 	makeindex $*
 	lualatex $*
-
-.tex.epub:
-	tex4ebook -c config.cfg $<
-
-.epub.UNPACKED:
-	mkdir -p $@
-	cd $@ && unzip -U -qq ../$<
+	tex4ebook -c config.cfg -e build.lua $< || /bin/true
+	rm -rf $*.UNPACKED && mkdir -p $*.UNPACKED
+	cd $*.UNPACKED && unzip -U -qq ../$*.epub
+	$(EPUBCHECK) $*.epub
 
 .SUFFIXES: .text .epub .pdf .FULL .VIEW .UNPACKED .CHECK .EPUB+CHECK
 

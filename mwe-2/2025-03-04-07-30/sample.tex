@@ -2,26 +2,25 @@
 
 \usepackage{makeidx,index}
 \makeindex
-
-% If I comment this out, indexes break in the PDF too
+% cannot comment this out, b/c all refs stop work in PDF
 \usepackage[hyperindex=true]{hyperref}
 
-% uncomment to remove HTML comment error found by epubcheck
+% cannot comment this out, or we get malformed HTML in OEBPS/sample.html
+% viz, elements before the xmldecl
 \usepackage[most]{tcolorbox}
 
 \begin{document}
 
 \tableofcontents
 
+\pagebreak
 \part{Programming with OCaml}
-
-\chapter{First Steps with OCaml}
-
+\chapter{First Steps with OCaml}\label{chap:debuter}
 \section{Leap Years}
 \index{leap (year)}
 
-
 %%% Index
+\label{lastpage}
 \cleardoublepage
 \addcontentsline{toc}{chapter}{Index}\label{index}
 \small\printindex
