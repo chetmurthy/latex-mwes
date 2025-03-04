@@ -1,0 +1,52 @@
+\documentclass[]{book}
+
+\usepackage[]{hyperref}
+\usepackage{listings}
+
+\newcounter{program}
+\renewcommand{\theprogram}{\arabic{program}}
+\newcommand\printprogram[1]{\theprogram\space #1\par}
+\newenvironment{program}[1]{\refstepcounter{program}\minipage{\textwidth}\printprogram{#1}}{\endminipage}
+
+\lstnewenvironment{ocaml}{\lstset{language=caml,escapechar=^}}{}
+
+\begin{document}
+
+Program~\ref{fig:label} (see
+page~\pageref{fig:label}) draws the Mandelbrot set
+(see figure~\ref{fig:mandelbrot}).
+
+\chapter{One}
+
+\begin{ocaml}
+  foo
+\end{ocaml}
+
+C\footnote{text}
+
+\chapter{Two}\label{chap:debuter}
+
+\begin{figure}[h!]
+  \centering
+foo
+  \caption{Mandelbrot set.}
+  \label{fig:mandelbrot}
+\end{figure}
+
+{
+\begin{figure}[tp]
+\begin{program}{Title}
+\label{fig:label}
+\lstinputlisting{/home/chet/Hack/Texlive/Install/README}%
+\end{program}
+\caption{Caption}
+%\label{fig:label}
+\end{figure}
+}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "francais"
+%%% End:
