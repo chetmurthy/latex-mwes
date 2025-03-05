@@ -1,0 +1,23 @@
+\documentclass[]{book}
+\usepackage{makeidx,index}
+\makeindex
+
+\begin{document}
+
+  and 2-3-4 trees~\cite{Algorithms4th}\index{tree!2-3-4}.
+
+\cleardoublepage
+
+\bibliographystyle{plain}
+\bibliography{./biblio}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\small\printindex
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% ispell-local-dictionary: "francais"
+%%% End:
