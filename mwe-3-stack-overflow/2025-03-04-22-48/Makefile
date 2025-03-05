@@ -11,17 +11,7 @@ sample.FULL: sample.tex
 	cd $*.UNPACKED && unzip -U -qq ../$*.epub
 	$(EPUBCHECK) $*.epub
 
-sample.IND-FILE-BROKEN: sample.tex
-	$(MAKE) clean
-	lualatex $*
-	makeindex $*
-	lualatex $*
-	tex4ebook -c config.cfg -e build.lua $< || /bin/true
-	rm -rf $*.UNPACKED && mkdir -p $*.UNPACKED
-	cd $*.UNPACKED && unzip -U -qq ../$*.epub
-	lualatex $*
-
-.SUFFIXES: .text .epub .pdf .FULL .VIEW .UNPACKED .CHECK .EPUB+CHECK .IND-FILE-BROKEN
+.SUFFIXES: .text .epub .pdf .FULL .VIEW .UNPACKED .CHECK .EPUB+CHECK
 
 clean:
 	rm -f *~ *.ind *.ilg *.pdx *.aux */*.aux */*/*.aux *.out *.toc *.idx *.pdf *.log *.epub *.png *.lot *.lof
